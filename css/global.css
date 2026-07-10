@@ -133,7 +133,7 @@ nav.on-dark .nav-links a:hover{ color:var(--paper); }
 .reveal {
   opacity: 0;
   transform: translateY(28px) scale(0.98);
-  transition: opacity 720ms cubic-bezier(.2,.9,.2,1), transform 720ms cubic-bezier(.2,.9,.2,1);
+  transition: opacity 500ms cubic-bezier(.2,.9,.2,1), transform 500ms cubic-bezier(.2,.9,.2,1);
   will-change: transform, opacity;
 }
 .reveal.active {

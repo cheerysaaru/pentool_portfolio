@@ -196,11 +196,15 @@ function initScrollReveal(){
     if(!nodeList.length) return;
 
     // Attach base class and optional delays
+    const instantRevealSelectors = ['.work-card', '.svc-card', '.cs-media', '.kpi', '.timeline-item', '.education-item', '.cs-ov-item'];
     nodeList.forEach((el, idx) => {
       if(!el.classList.contains('reveal')) el.classList.add('reveal');
+      const needsInstant = instantRevealSelectors.some(sel => el.matches(sel));
       // apply data-delay if present, otherwise small stagger for groups
       if(el.dataset.revealDelay){
         el.style.transitionDelay = el.dataset.revealDelay;
+      } else if(needsInstant){
+        el.style.transitionDelay = '0ms';
       } else if(el.parentElement && el.parentElement.classList.contains('stagger')){
         const children = Array.from(el.parentElement.children).filter(n=>n.nodeType===1);
         const i = children.indexOf(el);
@@ -211,14 +215,15 @@ function initScrollReveal(){
       }
     });
 
-    const io = new IntersectionObserver((entries, obs) => {
+    const io = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if(entry.isIntersecting){
           entry.target.classList.add('active');
-          obs.unobserve(entry.target);
+        } else {
+          entry.target.classList.remove('active');
         }
       });
-    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+    }, { threshold: 0.08, rootMargin: '0px 0px -22% 0px' });
 
     nodeList.forEach(el => io.observe(el));
   }catch(e){ console.warn('initScrollReveal error', e); }
