@@ -1,0 +1,174 @@
+/* ============================================
+   GLOBAL.CSS — shared design tokens + base styles
+   Loaded on every page. Page-specific styles live
+   in their own css/<page>.css file.
+   ============================================ */
+
+:root{
+  --ink:#14181F;
+  --ink-soft:#1E2430;
+  --paper:#F6F4EE;
+  --paper-dim:#EDEAE0;
+  --white:#FFFFFF;
+  --signal:#2E4BFF;
+  --signal-dim:#E7EBFF;
+  --coral:#FF5A36;
+  --line:#DAD7CC;
+  --line-dark:#2C3340;
+  --muted:#6B6F76;
+  --muted-light:#9BA0AE;
+  --radius:14px;
+  --disp: 'Space Grotesk', sans-serif;
+  --body: 'Inter', sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+}
+
+*{ box-sizing:border-box; margin:0; padding:0; }
+html{ scroll-behavior:smooth; }
+body{
+  font-family:var(--body);
+  background:var(--paper);
+  color:var(--ink);
+  line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+}
+img{ max-width:100%; display:block; }
+a{ color:inherit; text-decoration:none; }
+ul{ list-style:none; }
+section{ padding:64px 0; }
+
+/* Utility: tighter section spacing for compact layouts */
+.section--compact{ padding:36px 0; }
+.wrap{ max-width:1120px; margin:0 auto; padding:0 32px; }
+h1,h2,h3,h4{ font-family:var(--disp); font-weight:600; letter-spacing:-0.01em; }
+
+.eyebrow{
+  font-family:var(--mono); font-size:12px; letter-spacing:0.12em; text-transform:uppercase;
+  color:var(--signal); display:flex; align-items:center; gap:8px; margin-bottom:14px;
+}
+.eyebrow::before{ content:''; width:16px; height:1px; background:var(--signal); }
+.section-title{ font-size:clamp(28px,3.4vw,40px); margin-bottom:8px; }
+.section-sub{ color:var(--muted); max-width:520px; margin-bottom:48px; font-size:15.5px; }
+
+/* growth chip — the site's signature element */
+.chip{
+  display:inline-flex; align-items:center; gap:5px;
+  font-family:var(--mono); font-size:12px; font-weight:500;
+  padding:5px 11px; border-radius:999px;
+  background:var(--signal-dim); color:var(--signal);
+  border:1px solid rgba(46,75,255,0.18);
+  white-space:nowrap;
+}
+.chip.coral{ background:rgba(255,90,54,0.1); color:#D8431F; border-color:rgba(255,90,54,0.22); }
+.chip.dark{ background:rgba(255,255,255,0.08); color:var(--paper); border-color:rgba(255,255,255,0.16); }
+.chip::before{ content:'▲'; font-size:8px; transform:translateY(-1px); }
+.chip.flat::before{ content:'—'; font-size:10px; }
+
+.btn{
+  font-family:var(--mono); font-size:13.5px; font-weight:500; padding:13px 24px; border-radius:9px;
+  display:inline-flex; align-items:center; gap:8px; transition:transform .15s ease, background .2s;
+}
+.btn-primary{ background:var(--signal); color:var(--white); }
+.btn-primary:hover{ transform:translateY(-2px); }
+.btn-outline{ border:1px solid rgba(20,24,31,0.18); color:var(--ink); }
+.btn-outline:hover{ border-color:var(--ink); }
+
+/* NAV — shared across every page */
+nav{
+  position:fixed; top:0; left:0; right:0; z-index:100;
+  padding:20px 32px; display:flex; justify-content:space-between; align-items:center;
+  transition:background .3s ease, border-color .3s ease, padding .3s ease;
+  border-bottom:1px solid transparent;
+  background:rgba(246,244,238,0.92); backdrop-filter:blur(8px); border-color:var(--line);
+}
+nav.on-dark{ background:transparent; border-color:transparent; }
+nav.on-dark.scrolled{ background:rgba(20,24,31,0.92); border-color:var(--line-dark); }
+.nav-logo{ display:flex; align-items:center; }
+.nav-logo img{ height:20px; width:auto; display:block; }
+.nav-links{ display:flex; gap:32px; font-size:14px; font-weight:500; color:var(--muted); }
+nav.on-dark .nav-links{ color:rgba(246,244,238,0.75); }
+.nav-links a{ transition:color .15s ease; }
+.nav-links a:hover{ color:var(--ink); }
+nav.on-dark .nav-links a:hover{ color:var(--paper); }
+.nav-links a.active{ color:var(--signal); }
+.nav-cta{
+  font-family:var(--mono); font-size:12.5px; padding:8px 16px; border-radius:8px;
+  background:var(--signal); color:var(--white); font-weight:500;
+}
+.nav-mobile-hide{ display:flex; }
+@media(max-width:760px){ .nav-mobile-hide{ display:none; } }
+
+/* Slim footer — used on every page except contact.html, which has its own full CTA footer */
+.slim-footer{
+  border-top:1px solid var(--line);
+  padding:32px 0;
+  display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;
+}
+.slim-footer .fk{ font-family:var(--mono); font-size:12.5px; color:var(--muted); }
+.slim-footer a{ font-family:var(--mono); font-size:12.5px; color:var(--signal); font-weight:500; }
+
+::selection{ background:var(--signal); color:var(--white); }
+
+/* Custom circular glowing cursor */
+#custom-cursor{
+  position:fixed; left:0; top:0; width:16px; height:16px; border-radius:50%;
+  background:var(--signal); pointer-events:none; transform:translate(-50%,-50%);
+  box-shadow:0 0 10px rgba(46,75,255,0.28), 0 0 30px rgba(46,75,255,0.12);
+  transition:transform .12s ease, width .12s ease, height .12s ease, box-shadow .12s ease, opacity .12s ease;
+  z-index:2200; mix-blend-mode:normal; opacity:0.98;
+}
+#custom-cursor.cursor--hover{ transform:translate(-50%,-50%) scale(2); box-shadow:0 0 22px rgba(46,75,255,0.9), 0 0 44px rgba(46,75,255,0.35); }
+#custom-cursor.cursor--press{ transform:translate(-50%,-50%) scale(1.5); }
+
+@media(hover: none), (pointer: coarse){
+  /* hide custom cursor on touch devices */
+  #custom-cursor{ display:none !important; }
+}
+
+/* Scroll reveal utility classes */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px) scale(0.98);
+  transition: opacity 720ms cubic-bezier(.2,.9,.2,1), transform 720ms cubic-bezier(.2,.9,.2,1);
+  will-change: transform, opacity;
+}
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+.reveal-left { transform: translateX(-30px) translateY(8px) scale(0.98); }
+.reveal-right { transform: translateX(30px) translateY(8px) scale(0.98); }
+.reveal.active.reveal-left,
+.reveal.active.reveal-right { transform: translateX(0) translateY(0) scale(1); }
+.reveal-scale { transform: scale(0.96); }
+.reveal.active.reveal-scale { transform: scale(1); }
+
+/* Stagger helpers: add `stagger` to parent to stagger its children */
+.stagger > * { transition-delay: 0ms; }
+
+/* Respect user preference for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .reveal { transition: none !important; transform: none !important; opacity: 1 !important; }
+}
+
+/* Mobile responsive overrides */
+@media (max-width: 800px) {
+  html { font-size: 15px; }
+  nav { padding: 12px 18px; }
+  .wrap { padding: 0 18px; }
+  section { padding: 28px 0; }
+  .section--compact { padding: 20px 0; }
+  h1 { font-size: clamp(20px, 6.5vw, 28px); }
+  .section-title { font-size: clamp(20px, 5.4vw, 28px); }
+  .section-sub { font-size: 14px; }
+  .hero-sub { font-size: 15px; }
+  .kpi-row { display:flex; gap:12px; flex-wrap:wrap; }
+  .kpi{ min-width:45%; }
+  .kpi .num{ font-size:20px; }
+  .work-grid{ grid-template-columns:1fr; }
+  .svc-grid{ grid-template-columns:1fr; }
+  .cs-media-grid{ grid-template-columns:1fr 1fr; gap:12px; }
+  .work-cover{ height:120px; }
+  .cs-insight{ margin-bottom:40px; }
+  .nav-links{ gap:16px; font-size:13px; }
+}

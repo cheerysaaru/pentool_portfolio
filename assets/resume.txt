@@ -1,0 +1,19 @@
+PenTool — Digital Marketing Specialist
+
+Contact: hello@pentool.com
+Phone: +94 70 377 1851
+
+Summary:
+Experienced digital marketer specializing in campaign strategy, performance-driven creative, and analytics. Skilled in paid media, SEO, content strategy, and product marketing.
+
+Education:
+- BSc (Hons) Computer Science — Informatics Institute of Technology (IIT) — Currently in the 3rd year, specializing in software development, AI, and modern computing technologies.
+- Bachelor of Business Administration (BBA) — Sri Lanka Institute of Information Technology (SLIIT) — Currently in the 2nd year, focusing on business strategy, marketing, and management.
+- BSc in Data Analytics — German Government University — Currently in the 1st year, specializing in Business Analytics, data-driven decision making, and business intelligence.
+
+Experience:
+- Digital Marketing Specialist — PenTool — Campaigns across search, social, and display with measurable ROI.
+
+Skills: Paid Media, Analytics, Creative Strategy, SEO, A/B Testing, Conversion Optimization
+
+Note: Replace this placeholder with a proper PDF resume at `assets/resume.pdf` for a polished download.

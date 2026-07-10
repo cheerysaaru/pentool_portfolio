@@ -1,0 +1,13 @@
+/* ============================================
+   CONTACT.CSS — contact.html only
+   ============================================ */
+
+#contact{ background:var(--ink); color:var(--paper); text-align:center; min-height:70vh; display:flex; align-items:center; }
+#contact .wrap{ width:100%; }
+#contact h2{ font-size:clamp(32px,5vw,52px); margin-bottom:18px; }
+#contact p{ color:var(--muted-light); max-width:440px; margin:0 auto 32px; }
+.contact-cta{ display:flex; gap:14px; justify-content:center; flex-wrap:wrap; margin-bottom:56px; }
+#contact .btn-outline{ border-color:rgba(246,244,238,0.28); color:var(--paper); }
+#contact .btn-outline:hover{ border-color:var(--paper); }
+.socials{ display:flex; gap:24px; justify-content:center; font-family:var(--mono); font-size:13px; color:var(--muted-light); border-top:1px solid var(--line-dark); padding-top:28px; }
+.socials a:hover{ color:var(--paper); }
