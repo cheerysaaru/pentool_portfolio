@@ -14,7 +14,14 @@
 .t-org{ font-size:13.5px; color:var(--signal); margin-bottom:8px; }
 .t-desc{ font-size:14px; color:var(--muted); }
 #exped h2{ font-size:24px; margin-bottom:24px; }
-@media(max-width:800px){ #exped .wrap, #experience .wrap{ grid-template-columns:1fr; gap:48px; } }
+@media(max-width:800px){
+  #exped .wrap, #experience .wrap{ grid-template-columns:1fr; gap:32px; }
+  #experience .wrap{ gap:32px; }
+  .timeline-item{ padding:16px 0; grid-template-columns:1fr; gap:12px; }
+  .timeline-item:last-child{ border-bottom:none; }
+  .t-date{ padding-top:0; }
+  .cert-item{ padding:14px 0; }
+}
 
 #tools{ background:var(--paper-dim); }
 .tool-badges{ display:flex; flex-wrap:wrap; gap:12px; }

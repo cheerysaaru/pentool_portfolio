@@ -224,7 +224,27 @@ function initScrollReveal(){
   }catch(e){ console.warn('initScrollReveal error', e); }
 }
 
-document.addEventListener('DOMContentLoaded', () => { initScrollReveal(); });
+function initHeroReveal(){
+  const hero = document.getElementById('hero');
+  const preloader = document.getElementById('preloader');
+  if(preloader){
+    const finishPreloader = () => {
+      setTimeout(() => {
+        preloader.classList.add('hidden');
+        if(hero) hero.classList.add('hero-ready');
+      }, 6000);
+    };
+    if(document.readyState === 'complete'){
+      finishPreloader();
+    } else {
+      window.addEventListener('load', finishPreloader);
+    }
+  } else if(hero){
+    setTimeout(() => hero.classList.add('hero-ready'), 800);
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => { initScrollReveal(); initHeroReveal(); });
 
 // Verify resume PDF exists; if not, fall back to a text resume we included
 (function verifyResume(){
