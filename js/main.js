@@ -44,8 +44,49 @@ if (!('ontouchstart' in window) && document.body) {
 // and body should carry <body data-page="...">.
 const currentPage = document.body.dataset.page;
 document.querySelectorAll('.nav-links a[data-page]').forEach(link => {
-  if(link.dataset.page === currentPage) link.classList.add('active');
+  if(link.dataset.page === currentPage && currentPage !== 'index') link.classList.add('active');
 });
+
+function throttle(fn, delay){
+  let timeout = null;
+  return (...args) => {
+    if(timeout) return;
+    timeout = setTimeout(() => {
+      fn(...args);
+      timeout = null;
+    }, delay);
+  };
+}
+
+function initNavScrollSpy(){
+  const navLinks = Array.from(document.querySelectorAll('.nav-links a[href^="#"]'));
+  if(!navLinks.length) return;
+
+  const sections = navLinks
+    .map(link => ({ link, section: document.querySelector(link.getAttribute('href')) }))
+    .filter(item => item.section);
+  if(!sections.length) return;
+
+  const updateActiveLink = () => {
+    const offset = (nav && nav.offsetHeight) ? nav.offsetHeight + 16 : 96;
+    const scrollPos = window.scrollY + offset;
+    let activeLink = sections[0].link;
+
+    sections.forEach(({ section, link }) => {
+      if(section.offsetTop <= scrollPos) activeLink = link;
+    });
+
+    sections.forEach(({ link }) => {
+      link.classList.toggle('active', link === activeLink);
+    });
+  };
+
+  updateActiveLink();
+  window.addEventListener('scroll', throttle(updateActiveLink, 50), { passive: true });
+  window.addEventListener('resize', throttle(updateActiveLink, 120));
+  window.addEventListener('load', () => requestAnimationFrame(updateActiveLink));
+  window.addEventListener('hashchange', () => requestAnimationFrame(updateActiveLink));
+}
 
 // KPI count-up animation — only present on index.html
 const kpis = document.querySelectorAll('.kpi .num');
@@ -249,7 +290,7 @@ function initHeroReveal(){
   }
 }
 
-document.addEventListener('DOMContentLoaded', () => { initScrollReveal(); initHeroReveal(); });
+document.addEventListener('DOMContentLoaded', () => { initScrollReveal(); initHeroReveal(); initNavScrollSpy(); });
 
 // Verify resume PDF exists; if not, fall back to a text resume we included
 (function verifyResume(){
