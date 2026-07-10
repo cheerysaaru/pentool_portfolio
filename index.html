@@ -24,6 +24,9 @@
 </div>
 
 <nav id="nav" class="on-dark">
+  <button id="navToggle" class="nav-toggle" aria-label="Open menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
   <div class="nav-logo"><img src="assets/logo-white.png" alt="PenTool"></div>
   <div class="nav-mobile-hide nav-links">
     <a href="#hero" data-page="index">Home</a>
@@ -33,6 +36,14 @@
   </div>
   <a href="#contact" class="nav-cta">Let's talk →</a>
 </nav>
+
+<div id="navMobileMenu" class="nav-mobile-menu" aria-hidden="true">
+  <a href="#hero" data-page="index">Home</a>
+  <a href="#services" data-page="services">Services</a>
+  <a href="#work" data-page="work">Works</a>
+  <a href="#experience" data-page="experience">Experience</a>
+  <a href="#contact" data-page="contact">Contact</a>
+</div>
 
 <!-- HERO -->
 <section id="hero">
@@ -437,5 +448,26 @@
 </div>
 
 <script src="js/main.js"></script>
+<script>
+  const navToggle = document.getElementById('navToggle');
+  const navMobileMenu = document.getElementById('navMobileMenu');
+
+  navToggle.addEventListener('click', () => {
+    const isOpen = navMobileMenu.classList.toggle('open');
+    navToggle.classList.toggle('active', isOpen);
+    navToggle.setAttribute('aria-expanded', isOpen);
+    navMobileMenu.setAttribute('aria-hidden', !isOpen);
+  });
+
+  // close menu when a link is tapped
+  navMobileMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      navMobileMenu.classList.remove('open');
+      navToggle.classList.remove('active');
+      navToggle.setAttribute('aria-expanded', false);
+      navMobileMenu.setAttribute('aria-hidden', true);
+    });
+  });
+</script>
 </body>
 </html>

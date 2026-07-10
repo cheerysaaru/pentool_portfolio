@@ -102,6 +102,55 @@ nav.on-dark .nav-links a:hover{ color:var(--paper); }
 .nav-mobile-hide{ display:flex; }
 @media(max-width:760px){ .nav-mobile-hide{ display:none; } }
 
+/* Hamburger button — mobile only */
+.nav-toggle{
+  display:none;
+  flex-direction:column;
+  justify-content:center;
+  gap:5px;
+  width:32px; height:32px;
+  background:none; border:none; cursor:pointer;
+  padding:0;
+  order:-1; /* pushes it to the far left of the flex nav */
+}
+.nav-toggle span{
+  display:block;
+  width:22px; height:2px;
+  background:var(--ink);
+  border-radius:2px;
+  transition:transform .25s ease, opacity .25s ease;
+}
+nav.on-dark .nav-toggle span{ background:var(--paper); }
+
+/* turns into an X when open */
+.nav-toggle.active span:nth-child(1){ transform:translateY(7px) rotate(45deg); }
+.nav-toggle.active span:nth-child(2){ opacity:0; }
+.nav-toggle.active span:nth-child(3){ transform:translateY(-7px) rotate(-45deg); }
+
+/* Mobile dropdown menu */
+.nav-mobile-menu{
+  position:fixed;
+  top:0; left:0;
+  width:70%; max-width:280px;
+  height:100vh;
+  background:var(--ink);
+  z-index:99;
+  padding:90px 28px 28px;
+  display:flex; flex-direction:column; gap:22px;
+  transform:translateX(-100%);
+  transition:transform .3s ease;
+}
+.nav-mobile-menu.open{ transform:translateX(0); }
+.nav-mobile-menu a{
+  font-family:var(--disp);
+  font-size:18px;
+  font-weight:500;
+  color:var(--paper);
+}
+
+@media(max-width:760px){
+  .nav-toggle{ display:flex; }
+}
 /* Slim footer — used on every page except contact.html, which has its own full CTA footer */
 .slim-footer{
   border-top:1px solid var(--line);
